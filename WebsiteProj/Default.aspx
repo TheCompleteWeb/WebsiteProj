@@ -20,12 +20,19 @@
              Enter date : <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredDateValidator" runat="server" ControlToValidate="txtDate" ErrorMessage="Enter date!"></asp:RequiredFieldValidator>
              <br />
-             <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+             <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
              <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnCalender_Click" />
              <br />
         </div>
        
-        <asp:GridView ID="GridView1" runat="server">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">
+            <Columns>
+                <asp:CommandField CausesValidation="False" ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
+                <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                <asp:BoundField DataField="DateAdded" HeaderText="DateAdded" SortExpression="DateAdded" />
+            </Columns>
         </asp:GridView>
 
         <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
