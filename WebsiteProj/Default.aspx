@@ -21,7 +21,7 @@
              <asp:RequiredFieldValidator ID="RequiredDateValidator" runat="server" ControlToValidate="txtDate" ErrorMessage="Enter date!"></asp:RequiredFieldValidator>
              <br />
              <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
-             <asp:Button ID="btnCalender" runat="server" Text="Submit" />
+             <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnCalender_Click" />
              <br />
         </div>
        
@@ -30,7 +30,22 @@
 
         <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
        
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:personTableConnectionString %>" DeleteCommand="DELETE FROM [PersonTable] WHERE [Id] = @Id" InsertCommand="INSERT INTO [PersonTable] ([Name], [Email], [DateAdded]) VALUES (@Name, @Email, @DateAdded)" SelectCommand="SELECT [Id], [Name], [Email], [DateAdded] FROM [PersonTable]" UpdateCommand="UPDATE [PersonTable] SET [Name] = @Name, [Email] = @Email, [DateAdded] = @DateAdded WHERE [Id] = @Id">
+            <DeleteParameters>
+                <asp:Parameter Name="Id" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="Name" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter DbType="Date" Name="DateAdded" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="Name" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter DbType="Date" Name="DateAdded" />
+                <asp:Parameter Name="Id" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
        
     </form>
 </body>
