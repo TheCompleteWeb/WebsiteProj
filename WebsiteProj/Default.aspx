@@ -6,24 +6,43 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <link href="StyleSheet.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.12.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#DateBox").click(function () {
+                $("#calenddiv").slideDown(500);
+            });
+            
+        });
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-             Enter name : <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+        <div id ="main">
+             Enter name : <asp:TextBox ID="txtName" runat="server" CssClass ="boxes"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredNameValidator" runat="server" ControlToValidate="txtName" ErrorMessage="Must Enter Name"></asp:RequiredFieldValidator>
              <br />
-             Enter email : <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+             Enter email : <asp:TextBox ID="txtEmail" runat="server" CssClass ="boxes"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredEmailValidator" runat="server" ControlToValidate="txtEmail" ErrorMessage="Must enter email"></asp:RequiredFieldValidator>
              <asp:RegularExpressionValidator ID="RegularExpressionEmailValidator" runat="server" ControlToValidate="txtEmail" ErrorMessage="Must Enter Valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
              <br />
-             Enter date : <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
+            <div id="DateBox"> 
+             Enter date : <asp:TextBox ID="txtDate" runat="server" CssClass ="boxes"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredDateValidator" runat="server" ControlToValidate="txtDate" ErrorMessage="Enter date!"></asp:RequiredFieldValidator>
-             <br />
-             <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
+            </div>
+            <br />
+            
+            <div id ="calenddiv" style="display:none">
+                  <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
+            </div>
+
+
+           
              <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnCalender_Click" />
              <br />
-        </div>
+        
        
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">
             <Columns>
@@ -53,6 +72,7 @@
                 <asp:Parameter Name="Id" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
+       </div>
        
     </form>
 </body>
