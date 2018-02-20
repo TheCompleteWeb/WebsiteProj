@@ -37,4 +37,18 @@ public partial class _Default : System.Web.UI.Page
     {
         txtDate.Text = Calendar1.SelectedDate.ToShortDateString();
     }
+
+    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+        if (CheckBox1.Checked)
+        {
+            Calendar1.Visible = true;
+            CheckBox1.Text = "Uncheck to insert data and hide";
+        }
+        else
+        {
+            Calendar1.Visible = false;
+            CheckBox1.Text = "Check to show calender";
+        }
+    }
 }

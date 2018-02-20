@@ -8,19 +8,12 @@
     <title></title>
     <link href="StyleSheet.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.12.4.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#DateBox").click(function () {
-                $("#calenddiv").slideDown(500);
-            });
-            
-        });
-
-    </script>
+    
 </head>
 <body>
     <form id="form1" runat="server">
         <div id ="main">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
              Enter name : <asp:TextBox ID="txtName" runat="server" CssClass ="boxes"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredNameValidator" runat="server" ControlToValidate="txtName" ErrorMessage="Must Enter Name"></asp:RequiredFieldValidator>
              <br />
@@ -28,15 +21,21 @@
              <asp:RequiredFieldValidator ID="RequiredEmailValidator" runat="server" ControlToValidate="txtEmail" ErrorMessage="Must enter email"></asp:RequiredFieldValidator>
              <asp:RegularExpressionValidator ID="RegularExpressionEmailValidator" runat="server" ControlToValidate="txtEmail" ErrorMessage="Must Enter Valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
              <br />
-            <div id="DateBox"> 
-             Enter date : <asp:TextBox ID="txtDate" runat="server" CssClass ="boxes"></asp:TextBox>
+            
+             Enter date : <asp:TextBox ID="txtDate" runat="server" CssClass ="boxes" ReadOnly="True"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredDateValidator" runat="server" ControlToValidate="txtDate" ErrorMessage="Enter date!"></asp:RequiredFieldValidator>
-            </div>
+       
+             <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack="True" Text= "Check to show calender" OnCheckedChanged="CheckBox1_CheckedChanged" />
+       
             <br />
             
-            <div id ="calenddiv" style="display:none">
-                  <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
-            </div>
+            <asp:UpdatePanel runat ="server">
+                <ContentTemplate>
+                    <asp:Calendar ID="Calendar1" runat="server"  OnSelectionChanged="Calendar1_SelectionChanged" Visible="false"></asp:Calendar>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+                  
+            
 
 
            
@@ -75,5 +74,14 @@
        </div>
        
     </form>
+    <%--<script>
+        $(document).ready(function () {
+            $("#<%=txtDate.ID%>").click(function () {
+                $("#<%=Calendar1.ID%>").slideDown(500);
+            });
+
+        });
+
+    </script>--%>
 </body>
 </html>
