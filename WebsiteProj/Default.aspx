@@ -8,11 +8,12 @@
     <title></title>
     <link href="StyleSheet.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.12.4.js"></script>
-    
+    <script src="Scripts/jquery-ui-1.12.1.min.js"></script>
+
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id ="main">
+        <div id ="main" style="position:absolute">
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
              Enter name : <asp:TextBox ID="txtName" runat="server" CssClass ="boxes"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredNameValidator" runat="server" ControlToValidate="txtName" ErrorMessage="Must Enter Name"></asp:RequiredFieldValidator>
@@ -74,6 +75,17 @@
        </div>
        
     </form>
+    <script>
+        $(function () {
+            $("#main").draggable();
+            var topLeft = JSON.parse(localStorage.getItem('div'));
+            $("#main").css(topLeft)
+            $(window).on('beforeunload', function () {
+                var pos = $("#main").position();
+                localStorage.setItem('div', JSON.stringify(pos));
+            });
+        });
+    </script>
     <%--<script>
         $(document).ready(function () {
             $("#<%=txtDate.ID%>").click(function () {
